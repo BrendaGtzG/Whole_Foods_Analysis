@@ -1,4 +1,4 @@
-# Healthy Foods Cost Analysis
+# Whole Foods Market Business Analysis
 
 This analysis aims to answer the question: Do healthier foods cost less? The focus is on Whole Foods supermarket, evaluating the cost of healthier products with specific labels. The analysis provides actionable insights for business decisions based on statistical significance.
 
