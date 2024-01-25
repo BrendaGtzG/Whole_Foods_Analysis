@@ -1,0 +1,23 @@
+USE fmban_sql_analysis;
+
+SELECT category, sub.diet, ROUND(AVG(sub.cost_per_serving),2) AS avg_price, COUNT(*)
+FROM (SELECT category, 
+		(ROUND((CASE WHEN id BETWEEN 1 AND 226 THEN (price/100)
+		ELSE price END) 
+        / totalsize 
+        / servingsize, 2)) AS cost_per_serving,
+CASE WHEN lowsodium = 1 OR sugarconscious = 1 OR lowfat = 1 THEN 'Healthy' ELSE 'Unhealthy' END AS diet
+FROM fmban_data) AS sub
+GROUP BY category, diet
+ORDER BY category;
+
+
+SELECT sub.diet, ROUND(AVG(sub.cost_per_serving),2) AS avg_price, COUNT(*)
+FROM (SELECT 
+		(ROUND((CASE WHEN id BETWEEN 1 AND 226 THEN (price/100)
+		ELSE price END) 
+        / totalsize 
+        / servingsize, 2)) AS cost_per_serving,
+CASE WHEN lowsodium = 1 AND sugarconscious = 1 AND lowfat = 1 THEN 'Healthy' ELSE 'Unhealthy' END AS diet
+FROM fmban_data) AS sub
+GROUP BY diet;
